@@ -5,8 +5,11 @@
 #
 # @example
 #   include puppet_apache::install
-class puppet_apache::install {
-  package { 'httpd':
-    ensure => present,
+class puppet_apache::install (
+  $install_name   = $puppet_apache::params::install_name,
+  $install_ensure = $puppet_apache::params::install_ensure,
+) inherits puppet_apache::params {
+  package { "${install_name}":
+    ensure => $install_ensure,
   }
 }
